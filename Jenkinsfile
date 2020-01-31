@@ -14,6 +14,12 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('JaCoCo') {
+            steps {
+                echo 'Code Coverage'
+                jacoco()
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
