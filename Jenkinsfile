@@ -20,16 +20,17 @@ pipeline {
                 jacoco()
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
         stage('build && SonarQube analysis') {
             steps {
+                echo 'build && SonarQube analysis'
                 withSonarQubeEnv('sonarqube-local') {
                     sh 'mvn clean package sonar:sonar'
                 }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
 
