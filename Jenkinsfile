@@ -25,5 +25,13 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube-local') {
+                    sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
+
     }
 }
